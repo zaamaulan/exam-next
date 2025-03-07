@@ -3,8 +3,8 @@ import type { Metadata } from 'next'
 import { Geist } from 'next/font/google'
 import { NuqsAdapter } from 'nuqs/adapters/next/app'
 
-import { AppSidebar } from '@/components/organisms/app-sidebar'
-import { SidebarProvider } from '@/components/ui/sidebar'
+import { Toaster } from '@/components/ui/toaster'
+import { AuthProvider } from '@/providers/auth-provider'
 import { ReactQueryProvider } from '@/providers/react-query-provider'
 import { ThemeProvider } from '@/providers/theme-provider'
 
@@ -29,22 +29,22 @@ const RootLayout = ({
   return (
     <html lang="en">
       <body className={`${geist.className} antialiased`}>
-        <NuqsAdapter>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            storageKey="theme"
-            enableSystem
-            disableTransitionOnChange
-          >
-            <ReactQueryProvider>
-              <SidebarProvider>
-                <AppSidebar />
-                <main className="flex-1">{children}</main>
-              </SidebarProvider>
-            </ReactQueryProvider>
-          </ThemeProvider>
-        </NuqsAdapter>
+        <AuthProvider>
+          <NuqsAdapter>
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="system"
+              storageKey="theme"
+              enableSystem
+              disableTransitionOnChange
+            >
+              <ReactQueryProvider>
+                {children}
+                <Toaster />
+              </ReactQueryProvider>
+            </ThemeProvider>
+          </NuqsAdapter>
+        </AuthProvider>
       </body>
     </html>
   )

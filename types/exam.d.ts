@@ -23,6 +23,12 @@ type Question = {
   id: string
   examId: Exam['id']
   content: string
-  options: string[]
+  options: Option[]
   correctAnswer: string
+}
+
+type Option = {
+  id: string
+  questionId: Question['id']
+  content: string
 }

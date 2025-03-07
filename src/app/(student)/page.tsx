@@ -21,15 +21,8 @@ const Home = () => {
 
   return (
     <MainTemplate topbar={{ title: 'Welcome back, Reza!' }} className="flex flex-col gap-5">
-      <div className={cn('grid grid-cols-1 gap-3 md:gap-5', isTheExamOngoing ? 'md:grid-cols-11' : 'md:grid-cols-4')}>
+      <div className={cn('grid grid-cols-1 gap-3 md:gap-5', isTheExamOngoing ? 'md:grid-cols-9' : 'md:grid-cols-4')}>
         {isTheExamOngoing && <OngoingExamCard className="md:col-span-3" {...exam} />}
-        <StatCard
-          title="Average Score"
-          description="Average of all scores in all exams"
-          value={78.5}
-          variant={isTheExamOngoing ? 'default' : 'secondary'}
-          className={cn(isTheExamOngoing && 'md:col-span-2')}
-        />
         <StatCard
           title="Average Score"
           description="Average of all scores in all exams"

@@ -15,7 +15,11 @@ export const GET = async (request: Request, { params }: { params: { id: string }
       include:
         query.include === 'true'
           ? {
-              questions: true,
+              questions: {
+                include: {
+                  options: true,
+                },
+              },
               subject: true,
               teacher: true,
             }

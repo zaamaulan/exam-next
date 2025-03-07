@@ -2,7 +2,6 @@ import { api } from '../api'
 
 export const getExams = async (params?: Record<string, string>) => {
   try {
-    console.log(params)
     return await api
       .get('/exams', {
         params,

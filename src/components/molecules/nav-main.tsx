@@ -1,5 +1,6 @@
 'use client'
 
+import { useSession } from 'next-auth/react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import React from 'react'
@@ -15,7 +16,7 @@ import {
 } from '@/components/ui/sidebar'
 import { cn } from '@/libs/utils'
 
-const items = [
+const studentLinks = [
   {
     title: 'Dashboard',
     url: '/',
@@ -37,16 +38,36 @@ const items = [
     icon: SettingsIcon,
   },
 ]
+const adminLinks = [
+  {
+    title: 'Dashboard',
+    url: '/admin',
+    icon: DashboardIcon,
+  },
+  {
+    title: 'Recap',
+    url: '/admin/recap',
+    icon: DashboardIcon,
+  },
+  {
+    title: 'Settings',
+    url: '/settings',
+    icon: SettingsIcon,
+  },
+]
 
 export const NavMain = () => {
   const pathname = usePathname()
+  const { data: session } = useSession()
+
+  const isAdmin = session?.user.role === 'ADMIN'
 
   return (
     <SidebarGroup>
       <SidebarGroupLabel>General</SidebarGroupLabel>
       <SidebarGroupContent>
         <SidebarMenu>
-          {items.map((item) => {
+          {(isAdmin ? adminLinks : studentLinks).map((item) => {
             const active = item.url === '/' ? pathname === '/' : pathname.startsWith(item.url)
 
             return (
